@@ -1,0 +1,5 @@
+com\ssdut\KindGardenProject\service\UserInfoService.class
+com\ssdut\KindGardenProject\service\impl\UserInfoServiceImpl.class
+com\ssdut\KindGardenProject\pojo\UserInfo.class
+com\ssdut\KindGardenProject\controller\UserInfoController.class
+com\ssdut\KindGardenProject\dao\UserInfoMapper.class

@@ -1,0 +1,8 @@
+@Service//注入服务层
+@autowired//注入成员类
+@Controller
+@RequestMapping("/attendance")
+
+maven-build:
+
+mybatis-generator:generate

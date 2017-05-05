@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssdut.KindGardenProject.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.ssdut.KindGardenProject.pojo.Teacher" >
+    <id column="Tid" property="tid" jdbcType="INTEGER" />
+    <result column="Tname" property="tname" jdbcType="VARCHAR" />
+    <result column="Temail" property="temail" jdbcType="VARCHAR" />
+    <result column="Gid" property="gid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Tid, Tname, Temail, Gid
+  </sql>
+  <select id="getAllTeachersByGID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  select 
+  <include refid="Base_Column_List" />
+  from teacher
+  where Gid=#{gid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where Tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teacher
+    where Tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssdut.KindGardenProject.pojo.Teacher" >
+    insert into teacher (Tid, Tname, Temail, 
+      Gid)
+    values (#{tid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, #{temail,jdbcType=VARCHAR}, 
+      #{gid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssdut.KindGardenProject.pojo.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        Tid,
+      </if>
+      <if test="tname != null" >
+        Tname,
+      </if>
+      <if test="temail != null" >
+        Temail,
+      </if>
+      <if test="gid != null" >
+        Gid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="temail != null" >
+        #{temail,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null" >
+        #{gid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssdut.KindGardenProject.pojo.Teacher" >
+    update teacher
+    <set >
+      <if test="tname != null" >
+        Tname = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="temail != null" >
+        Temail = #{temail,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null" >
+        Gid = #{gid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssdut.KindGardenProject.pojo.Teacher" >
+    update teacher
+    set Tname = #{tname,jdbcType=VARCHAR},
+      Temail = #{temail,jdbcType=VARCHAR},
+      Gid = #{gid,jdbcType=INTEGER}
+    where Tid = #{tid,jdbcType=INTEGER}
+  </update>
+</mapper>

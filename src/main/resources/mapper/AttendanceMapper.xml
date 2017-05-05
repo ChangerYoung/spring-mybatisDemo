@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssdut.KindGardenProject.dao.AttendanceMapper" >
+  <resultMap id="BaseResultMap" type="com.ssdut.KindGardenProject.pojo.Attendance" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ChildName" property="childname" jdbcType="VARCHAR" />
+    <result column="SignInTime" property="signintime" jdbcType="VARCHAR" />
+    <result column="SignInReason" property="signinreason" jdbcType="VARCHAR" />
+    <result column="SignOutTime" property="signouttime" jdbcType="VARCHAR" />
+    <result column="SignOutReason" property="signoutreason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ChildName, SignInTime, SignInReason, SignOutTime, SignOutReason
+  </sql>
+  <select id="getAllAttendance" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from Attendance
+</select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from attendance
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from attendance
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssdut.KindGardenProject.pojo.Attendance" >
+    insert into attendance (id, ChildName, SignInTime, 
+      SignInReason, SignOutTime, SignOutReason
+      )
+    values (#{id,jdbcType=INTEGER}, #{childname,jdbcType=VARCHAR}, #{signintime,jdbcType=VARCHAR}, 
+      #{signinreason,jdbcType=VARCHAR}, #{signouttime,jdbcType=VARCHAR}, #{signoutreason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssdut.KindGardenProject.pojo.Attendance" >
+    insert into attendance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="childname != null" >
+        ChildName,
+      </if>
+      <if test="signintime != null" >
+        SignInTime,
+      </if>
+      <if test="signinreason != null" >
+        SignInReason,
+      </if>
+      <if test="signouttime != null" >
+        SignOutTime,
+      </if>
+      <if test="signoutreason != null" >
+        SignOutReason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="childname != null" >
+        #{childname,jdbcType=VARCHAR},
+      </if>
+      <if test="signintime != null" >
+        #{signintime,jdbcType=VARCHAR},
+      </if>
+      <if test="signinreason != null" >
+        #{signinreason,jdbcType=VARCHAR},
+      </if>
+      <if test="signouttime != null" >
+        #{signouttime,jdbcType=VARCHAR},
+      </if>
+      <if test="signoutreason != null" >
+        #{signoutreason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssdut.KindGardenProject.pojo.Attendance" >
+    update attendance
+    <set >
+      <if test="childname != null" >
+        ChildName = #{childname,jdbcType=VARCHAR},
+      </if>
+      <if test="signintime != null" >
+        SignInTime = #{signintime,jdbcType=VARCHAR},
+      </if>
+      <if test="signinreason != null" >
+        SignInReason = #{signinreason,jdbcType=VARCHAR},
+      </if>
+      <if test="signouttime != null" >
+        SignOutTime = #{signouttime,jdbcType=VARCHAR},
+      </if>
+      <if test="signoutreason != null" >
+        SignOutReason = #{signoutreason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssdut.KindGardenProject.pojo.Attendance" >
+    update attendance
+    set ChildName = #{childname,jdbcType=VARCHAR},
+      SignInTime = #{signintime,jdbcType=VARCHAR},
+      SignInReason = #{signinreason,jdbcType=VARCHAR},
+      SignOutTime = #{signouttime,jdbcType=VARCHAR},
+      SignOutReason = #{signoutreason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
